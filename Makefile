@@ -1,18 +1,18 @@
 SRCS = ft_printf.c \
-	   ft_strncmp.c \
 	   ft_flags.c \
-	   ft_main.c \
+	   ft_field.c \
+	   ft_format.c \
+	   main.c \
 
-OBJS = $(SRCS:.c=.o)
-NAME = libftprintf.a
+OBJS = $(addprefix objs/,$(SRCS:.c=.o))
+NAME = ft_printf
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	gcc -Wall -Wextra -Werror -o test $(OBJS)
-	#ar rs $(NAME) $(OBJS)
+	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJS)
 
-%.o: srcs/%.c
+objs/%.o: srcs/%.c
 	gcc -Wall -Wextra -Werror -Iincs -o $@ -c $<
 
 clean:

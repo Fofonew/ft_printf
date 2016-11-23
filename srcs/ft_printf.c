@@ -6,39 +6,47 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/20 17:18:22 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/23 13:18:17 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
 
-const char	*ft_process(char *format)
+static char			*ft_process(char *s)
 {
-	t_flags			*flags;
+	long			f;
 	unsigned int	shift;
 	unsigned int	tmp;
 
+	f = 0;
 	shift = 0;
-	if (!(flags = malloc(sizeof(t_flags))))
-		return (0);
-	while ((tmp = ft_flag(&format[shift], flags)))
+	if (*s == '%')
+	{
+		write(1, "%", 1);
+		return (&(s[shift + 1]));
+	}
+	while ((tmp = ft_flags(&s[shift], f)))
 		shift += tmp;
-	if ((tmp = ft_field(format)))
+	if ((tmp = ft_field(&s[shift])))
 		shift += tmp;
-	if ((tmp = ft_format(format)))
-		return (&format[shift + 1]);
-	return (format);
+	if ((tmp = ft_flags(&s[shift], f)))
+		return (&s[shift + 1]);
+	return (0);
 }
 
-int			ft_printf(const char *format, ...)
+int					ft_printf(const char *s, ...)
 {
-	va_list		ap;
+	va_list			ap;
 
-	va_start(ap, format);
-	while (*format)
-			if (*format++ == '%')
-				if (!(format = ft_process((char*)format)))
-					return (-1);
+	va_start(ap, s);
+	while (*s)
+	{
+		if (*s == '%' && !(s = ft_process((char*)(s + 1))))
+			return (-1);
+		if (*s)
+			write(1, s, 1);
+		s++;
+	}
 	va_end(ap);
 	return (0);
 }

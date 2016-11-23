@@ -6,13 +6,14 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 17:11:12 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/20 17:11:31 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/23 13:18:00 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
 
-int			ft_field(char *format)
+int			ft_field(char *s)
 {
+	s = 0;
 	return (0);
 }
