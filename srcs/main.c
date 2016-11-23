@@ -3,7 +3,6 @@
 
 int		main(void)
 {
-	ft_printf("A%%B\n");
-	//printf("Hi");
+	printf("%d\n", ft_printf("Coucou %s va\n", "ca"));
 	return (0);
 }

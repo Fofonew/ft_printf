@@ -1,31 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_format.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/20 17:11:37 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/23 17:24:41 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/09 12:37:42 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/23 17:00:58 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "link.h"
+#include <string.h>
 
-int		ft_string(char *s, unsigned long *f, int *c)
+size_t		ft_strlen(char *str)
 {
-	if (!s)
-		return (0);
-	write(1, s, ft_strlen(s));
-	*c += ft_strlen(s);
-	f = 0;
-	return (1);
-}
+	size_t	i;
 
-int		ft_format(char *s, unsigned long *f, va_list ap, int *c)
-{
-	/*if (*f >> 1 && 1)*/
-	if (*s == 's')
-		return (ft_string(va_arg(ap, char*), f, c));
-	return (-1);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

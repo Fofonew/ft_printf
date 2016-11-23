@@ -6,47 +6,58 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/23 13:18:17 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/23 17:18:48 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
 
-static char			*ft_process(char *s)
+static char			*ft_convert(char *s, va_list ap, int *c)
 {
-	long			f;
-	unsigned int	shift;
-	unsigned int	tmp;
+	unsigned long	f[1];
+	int				shift;
+	int				tmp;
 
-	f = 0;
+	*f = 0;
 	shift = 0;
 	if (*s == '%')
 	{
+		(*c)++;
 		write(1, "%", 1);
-		return (&(s[shift + 1]));
+		return (++s);
 	}
-	while ((tmp = ft_flags(&s[shift], f)))
+	while ((tmp = ft_prim_flags(&s[shift], f)))
 		shift += tmp;
-	if ((tmp = ft_field(&s[shift])))
+	while ((tmp = ft_sec_flags(&s[shift], f)))
 		shift += tmp;
-	if ((tmp = ft_flags(&s[shift], f)))
+	shift += ft_field(&s[shift], f, ap);
+	if (!(tmp = ft_format(&s[shift], f, ap, c)))
+		return (0);
+	else if (tmp != -1)
 		return (&s[shift + 1]);
-	return (0);
+	(*c)++;
+	write(1, "%", 1);
+	return (s);
 }
 
 int					ft_printf(const char *s, ...)
 {
 	va_list			ap;
+	int				c[1];
 
+	*c = 0;
 	va_start(ap, s);
 	while (*s)
-	{
-		if (*s == '%' && !(s = ft_process((char*)(s + 1))))
-			return (-1);
-		if (*s)
-			write(1, s, 1);
-		s++;
-	}
+		if (*s == '%')
+		{
+			if (!(s = ft_convert((char*)(s + 1), ap, c)))
+				return (-1);
+		}
+		else
+		{
+			(*c)++;
+			write(1, s++, 1);
+		}
 	va_end(ap);
-	return (0);
+	return (*c);
 }

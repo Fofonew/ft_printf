@@ -2,9 +2,10 @@ SRCS = ft_printf.c \
 	   ft_flags.c \
 	   ft_field.c \
 	   ft_format.c \
+	   ft_strlen.c \
 	   main.c \
 
-OBJS = $(addprefix objs/,$(SRCS:.c=.o))
+OBJS = $(SRCS:.c=.o)
 NAME = ft_printf
 
 all: $(NAME)
@@ -12,7 +13,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	gcc -Wall -Wextra -Werror -o $(NAME) $(OBJS)
 
-objs/%.o: srcs/%.c
+%.o: srcs/%.c
 	gcc -Wall -Wextra -Werror -Iincs -o $@ -c $<
 
 clean:
