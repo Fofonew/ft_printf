@@ -3,6 +3,8 @@
 
 int		main(void)
 {
-	printf("%d\n", ft_printf("Coucou %s va\n", "ca"));
+	char str[1];
+
+	printf("%d\n", ft_printf("%p\n", str));
 	return (0);
 }

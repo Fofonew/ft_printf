@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_f.c                                         :+:      :+:    :+:   */
+/*   ft_flags.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/20 17:00:19 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/23 16:40:33 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/24 12:58:15 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/24 12:58:18 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,24 @@ int			ft_prim_flags(char *s, unsigned long *f)
 
 int			ft_sec_flags(char *s, unsigned long *f)
 {
-	if (*s == 'h' && *(s + 1) == 'h') // set for single use
-		*f |= 1 << 5;
+	int		flag;
+
+	flag = 0;
+	if (*s == 'h' && *(s + 1) == 'h')
+		flag = 5;
 	else if (*s == 'h')
-		*f |= 1 << 6;
+		flag = 6;
 	else if (*s == 'l' && *(s + 1) == 'l')
-		*f |= 1 << 7;
+		flag = 7;
 	else if (*s == 'l')
-		*f |= 1 << 8;
+		flag = 8;
 	else if (*s == 'j')
-		*f |= 1 << 9;
+		flag = 9;
 	else if (*s == 'z')
-		*f |= 1 << 10;
-	else
+		flag = 10;
+	if (!flag || (*f >> 5 & 63))
 		return (0);
+	*f |= 1 << flag;
 	return ((*s == 'h' && *(s + 1) == 'h') ||
 	(*s == 'l' && *(s + 1) == 'l') ? 2 : 1);
 }

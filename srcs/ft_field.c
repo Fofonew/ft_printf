@@ -6,12 +6,11 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 17:11:12 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/23 16:52:57 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/24 12:58:09 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
-#include <stdio.h>
 
 int			ft_field(char *s, unsigned long *f, va_list ap)
 {
