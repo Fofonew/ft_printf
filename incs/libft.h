@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 21:48:08 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/09 13:25:06 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/24 14:47:44 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ int				ft_countwords(const char *s, int c);
 void			ft_puttab(char **tab);
 int				ft_isspace(char c);
 void			ft_lstpush(t_list **alst, t_list *new);
+char			*ft_itoabase(int n, char *b);
+void			ft_putunbr(unsigned int n);
 
 #endif

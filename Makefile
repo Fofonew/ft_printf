@@ -59,12 +59,17 @@ LIB = ft_atoi.c \
 	  ft_lstmap.c \
 	  ft_countwords.c \
 	  ft_isspace.c \
-	  ft_lstpush.c
+	  ft_lstpush.c \
+	  ft_itoabase.c \
+	  ft_putunbr.c
 
 SRCS = ft_printf.c \
 	   ft_flags.c \
 	   ft_field.c \
 	   ft_format.c \
+	   ft_conv_a.c \
+	   ft_conv_b.c \
+	   ft_conv_c.c
 
 LOBJS = $(addprefix lib/, $(LIB:.c=.o))
 OBJS = $(addprefix srcs/, $(SRCS:.c=.o))
@@ -76,20 +81,26 @@ FLAGS = -Wall -Wextra -Werror
 all: $(NAME)
 
 $(NAME): $(LOBJS) $(OBJS)
-	ar -rs $(NAME) $(LOBJS) $(OBJS)
+	@ar -rsc $(NAME) $(LOBJS) $(OBJS)
+	@echo "$(NAME) compiled"
 	@$(CC) -I incs -o printf $(NAME) main.c
+	@echo "printf compiled"
 
 lib/%.o: lib/%.c
-	$(CC) $(FLAGS) -I incs -o $@ -c $<
+	@$(CC) $(FLAGS) -I incs -o $@ -c $<
+	@echo "compiled $@"
 
 srcs/%.o: srcs/%.c
-	$(CC) $(FLAGS) -I incs -o $@ -c $<
+	@$(CC) $(FLAGS) -I incs -o $@ -c $<
+	@echo "compiled $@"
 
 clean:
-	rm -f $(LOBJS) $(OBJS)
+	@rm -f $(LOBJS) $(OBJS)
+	@echo "objs cleaned"
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 	@rm -f printf
+	@echo "workspace cleaned"
 
 re: fclean all

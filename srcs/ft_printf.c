@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/24 12:58:25 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/24 14:30:57 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char			*ft_convert(char *s, va_list ap, int *c)
 	while ((tmp = ft_sec_flags(&s[shift], f)))
 		shift += tmp;
 	shift += ft_field(&s[shift], f, ap);
-	if (!(tmp = ft_format(&s[shift], f, ap, c)))
+	if (!(tmp = ft_format(&s[shift], *f, ap, c)))
 		return (0);
 	else if (tmp != -1)
 		return (&s[shift + 1]);
