@@ -82,25 +82,25 @@ all: $(NAME)
 
 $(NAME): $(LOBJS) $(OBJS)
 	@ar -rsc $(NAME) $(LOBJS) $(OBJS)
-	@echo "$(NAME) compiled"
+	@echo "[$(NAME)]"
 	@$(CC) -I incs -o printf $(NAME) main.c
-	@echo "printf compiled"
+	@echo "[printf]"
 
 lib/%.o: lib/%.c
 	@$(CC) $(FLAGS) -I incs -o $@ -c $<
-	@echo "compiled $@"
+	@echo "[$@]"
 
 srcs/%.o: srcs/%.c
 	@$(CC) $(FLAGS) -I incs -o $@ -c $<
-	@echo "compiled $@"
+	@echo "[$@]"
 
 clean:
 	@rm -f $(LOBJS) $(OBJS)
-	@echo "objs cleaned"
+	@echo "[objs removed]"
 
 fclean: clean
 	@rm -f $(NAME)
 	@rm -f printf
-	@echo "workspace cleaned"
+	@echo "[workspace clean]"
 
 re: fclean all

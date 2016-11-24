@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 15:29:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/24 15:46:28 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/24 17:20:10 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		main(void)
 {
-	ft_printf("%d\n", ft_printf("%s\n", "Hi"));
-	//ft_printf("%d\n", ft_printf("%#X\n", 1000));
+	ft_printf("%d\n", printf("%ld\n", 100000000000));
+	ft_printf("%d\n", printf("%d\n", 100000000000));
 	return (0);
 }
