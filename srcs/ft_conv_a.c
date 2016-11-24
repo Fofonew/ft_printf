@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/24 13:41:41 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/24 15:24:55 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/24 21:48:26 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ int			ft_p(void *p, unsigned long f, int *c)
 	return (1);
 }
 
-int			ft_di(int n, unsigned long f, int *c)
+int			ft_di(long long n, unsigned long f, int *c)
 {
-	unsigned int	n2;
+	long long	n2;
 
 	ft_putnbr(n);
 	n2 = n < 0 ? -n : n;

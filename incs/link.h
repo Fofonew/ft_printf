@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/19 13:11:20 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/24 15:28:30 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/24 21:52:59 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int				ft_format(char *s, unsigned long f, va_list ap, int *c);
 
 int				ft_s(char *s, unsigned long f, int *c);
 int				ft_p(void *p, unsigned long f, int *c);
-int				ft_di(int n, unsigned long f, int *c);
+int				ft_di(long long n, unsigned long f, int *c);
 int				ft_o(int n, unsigned long f, int *c);
 int				ft_u(unsigned int n, unsigned long f, int *c);
 int				ft_x(int n, unsigned long f, int *c);
