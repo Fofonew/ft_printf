@@ -6,66 +6,51 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 17:11:37 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/24 21:58:28 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:11:46 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
-#include <stdio.h>
 
 int				ft_format(char *s, unsigned long f, va_list ap, int *c)
 {
-	/*if (*s == 'S' || (*s == 's' && f >> 8 & 1))
-		return (ft_ws(va_arg(ap, wchar_t*), f, c));*/
-	if (*s == 's')
-		return (ft_s(va_arg(ap, char*), f, c));
-
-
+	if (*s == 's' || *s == 'S')
+		return (ft_s(ap, f, c));
 	if (*s == 'p')
-		return (ft_p(va_arg(ap, void*), f, c));
-
-
-	/*if ((*s == 'd' || *s == 'i') && (f >> 5 & 1))
-		return (ft_hhdi(va_arg(ap, signed char), f, c));*/
-	/*if ((*s == 'd' || *s == 'i') && (f >> 6 & 1))
-		return (ft_hdi(va_arg(ap, short), f, c));*/
-	if ((*s == 'd' || *s == 'i') && (f >> 7 & 1))
-		return (ft_di(va_arg(ap, long long), f, c));
-	if ((*s == 'd' || *s == 'i') && (f >> 8 & 1))
-		return (ft_di((long long)va_arg(ap, long), f, c));
-	/*if ((*s == 'd' || *s == 'i') && (f >> 9 & 1))
-		return (ft_jdi(va_arg(ap, intmax_t), f, c));
-	if ((*s == 'd' || *s == 'i') && (f >> 10 & 1))
-		return (ft_zdi(va_arg(ap, size_t), f, c));
-	if ((*s == 'd' || *s == 'i') && (f >> 8 & 1))
-		return (ft_tdi(va_arg(ap, ptrdiff_t), f, c));*/
+		return (ft_p(ap, f, c));
 	if ((*s == 'd' || *s == 'i'))
-		return (ft_di((long long)va_arg(ap, int), f, c));
-	/*if (*s == 'D')
-		return (ft_D(va_arg(ap, unsigned int), f, c));*/
-
-
-	/*if (*s == 'o')
-		return (ft_o(va_arg(ap, int), f, c));
-	if (*s == 'O') unsigned octal
-		return (ft_O(va_arg(ap, void), f, c));*/
-
-
+		return (ft_di(ap, f, c));
+	if (*s == 'D')
+		return (ft_dd(ap, f, c));
+	if (*s == 'o')
+		return (ft_o(ap, f, c));
+	if (*s == 'O')
+		return (ft_oo(ap, f, c));
 	if (*s == 'u')
-		return (ft_u(va_arg(ap, int), f, c));
-	/*if (*s == 'U') unsigned decimal
-		return (ft_U(va_arg(ap, void), f, c));*/
-
-
-	if (*s == 'x')
-		return (ft_x(va_arg(ap, int), f, c));
-	if (*s == 'X')
-		return (ft_X(va_arg(ap, int), f, c));
-
-
-	if (*s == 'c')
-		return (ft_c(va_arg(ap, int), f, c));
-	/*if (*s == 'C') wint_t
-		return (ft_wc(va_arg(ap, wchar_t), f, c));*/
+		return (ft_u(ap, f, c));
+	if (*s == 'U')
+		return (ft_uu(ap, f, c));
+	if (*s == 'x' || *s == 'X')
+		return (ft_x(ap, f, c, (*s == 'x') ? 0 : 1));
+	if (*s == 'c' || *s == 'C')
+		return (ft_c(ap, f, c));
+	if (*s == 'e' || *s == 'E')
+		return (ft_e(ap, f, c, (*s == 'e') ? 0 : 1));
+	if (*s == 'f' || *s == 'F')
+		return (ft_f(ap, f ,c , (*s == 'f') ? 0 : 1));
+	if (*s == 'g' || *s == 'G')
+		return (ft_g(ap, f, c, (*s == 'g') ? 0 : 1));
+	if (*s == 'a' || *s == 'A')
+		return (ft_a(ap, f, c, (*s == 'a') ? 0 : 1));
+	if (*s == 'n')
+		return (ft_n(ap, f, c));
+	if (*s == 'b')
+		return (ft_b(ap, f, c));
+	if (*s == 'r')
+		return (ft_r(ap, f, c));
+	if (*s == 'k')
+		return (ft_k(ap, f, c));
+	if (*s == 'f' && *(s + 1) == 'd')
+		return (ft_fd(ap, f, c));
 	return (-1);
 }

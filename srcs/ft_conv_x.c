@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_conv_x.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 15:29:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/25 16:32:26 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/25 15:12:57 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/25 18:14:27 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
-#include <stdio.h>
 
-int		main(void)
+int			ft_x(va_list ap, unsigned long f, int *c, int t)
 {
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	return (0);
+	char			*hex;
+	
+	if (!(hex = ft_itoabase(n, (t == 1) ?
+	"0123456789abcdef" : "012344456789ABCDEF")))
+		return (0);
+	if(*hex && (f & 1) && ((*c) += 2))
+		write(1, "0x", 2);
+	write(1, hex, ft_strlen(hex));
+	(*c) += ft_strlen(hex);
+	return (1);
 }

@@ -1,21 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_conv_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 15:29:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/25 16:32:26 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/25 17:22:58 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/25 18:16:04 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
-#include <stdio.h>
 
-int		main(void)
+int			ft_conv_fd(va_list ap, unsigned long f, int *c)
 {
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	return (0);
+	int		fd;
+	int		rd;
+	char	buff[33];
+
+	fd = va_arg(ap, int);
+	while ((rd = read(fd, buff, 32)))
+	{
+		if (rd == -1)
+			return (-1);
+		buff[rd] = '\0';
+		(*c) += rd;
+		ft_putstr(buff);
+	}
+	return (1);
 }

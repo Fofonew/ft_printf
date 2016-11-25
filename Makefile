@@ -67,9 +67,21 @@ SRCS = ft_printf.c \
 	   ft_flags.c \
 	   ft_field.c \
 	   ft_format.c \
+	   ft_conv_di.c \
+	   ft_conv_u.c \
+	   ft_conv_o.c \
+	   ft_conv_c.c \
+	   ft_conv_s.c \
+	   ft_conv_p.c \
+	   ft_conv_x.c \
+	   ft_conv_e.c \
+	   ft_conv_f.c \
+	   ft_conv_g.c \
 	   ft_conv_a.c \
+	   ft_conv_n.c \
 	   ft_conv_b.c \
-	   ft_conv_c.c
+	   ft_conv_r.c \
+	   ft_conv_k.c \
 
 LOBJS = $(addprefix lib/, $(LIB:.c=.o))
 OBJS = $(addprefix srcs/, $(SRCS:.c=.o))

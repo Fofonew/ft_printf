@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_conv_e.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 15:29:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/25 16:32:26 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/25 17:13:33 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/25 17:15:27 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "link.h"
-#include <stdio.h>
-
-int		main(void)
+int			ft_conv_e(va_list ap, unsigned long f, int *c, int t)
 {
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
 	return (0);
 }

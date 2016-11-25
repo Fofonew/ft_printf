@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_conv_di.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 15:29:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/25 16:32:26 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/25 15:13:29 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/25 16:44:09 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
-#include <stdio.h>
 
-int		main(void)
+int			ft_dd(va_list ap, unsigned long f, int *c)
 {
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	return (0);
+	unsigned int	n2;
+
+	ft_putnbr(n);
+	n2 = n < 0 ? -n : n;
+	(*c) += n < 0 ? 2 : 1;
+	while ((n2 /= 10) * 10 >= 10 && (*c)++);
+	f = 0;
+	return (1);
 }

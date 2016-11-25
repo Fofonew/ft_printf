@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_conv_p.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/24 15:29:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/25 16:32:26 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/25 15:23:17 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/25 17:38:24 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
-#include <stdio.h>
 
-int		main(void)
+int			ft_p(va_list ap, unsigned long f, int *c)
 {
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	ft_printf("%d\n", ft_printf("%a%%%d\n", 10000000000));
-	return (0);
+	char	*hex;
+
+	write(1, "0x7fff", 6);
+	if (!(hex = ft_itoabase((int)p, "0123456789abcdef")))
+		return (0);
+	write(1, hex, ft_strlen(hex));
+	(*c) += 6 + ft_strlen(hex);
+	free(hex);
+	f = 0;
+	return (1);
 }
