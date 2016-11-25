@@ -6,11 +6,34 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/20 17:11:37 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/25 18:11:46 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/25 18:59:55 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "link.h"
+
+static int		ft_format_bonus(char *s, unsigned long f, va_list ap, int *c)
+{
+	if (*s == 'e' || *s == 'E')
+		return (ft_e(ap, f, c, (*s == 'e') ? 0 : 1));
+	if (*s == 'f' || *s == 'F')
+		return (ft_f(ap, f, c, (*s == 'f') ? 0 : 1));
+	if (*s == 'g' || *s == 'G')
+		return (ft_g(ap, f, c, (*s == 'g') ? 0 : 1));
+	if (*s == 'a' || *s == 'A')
+		return (ft_a(ap, f, c, (*s == 'a') ? 0 : 1));
+	if (*s == 'n')
+		return (ft_n(ap, f, c));
+	if (*s == 'b')
+		return (ft_b(ap, f, c));
+	if (*s == 'r')
+		return (ft_r(ap, f, c));
+	if (*s == 'k')
+		return (ft_k(ap, f, c));
+	if (*s == 'f' && *(s + 1) == 'd')
+		return (ft_fd(ap, f, c));
+	return (-1);
+}
 
 int				ft_format(char *s, unsigned long f, va_list ap, int *c)
 {
@@ -34,23 +57,5 @@ int				ft_format(char *s, unsigned long f, va_list ap, int *c)
 		return (ft_x(ap, f, c, (*s == 'x') ? 0 : 1));
 	if (*s == 'c' || *s == 'C')
 		return (ft_c(ap, f, c));
-	if (*s == 'e' || *s == 'E')
-		return (ft_e(ap, f, c, (*s == 'e') ? 0 : 1));
-	if (*s == 'f' || *s == 'F')
-		return (ft_f(ap, f ,c , (*s == 'f') ? 0 : 1));
-	if (*s == 'g' || *s == 'G')
-		return (ft_g(ap, f, c, (*s == 'g') ? 0 : 1));
-	if (*s == 'a' || *s == 'A')
-		return (ft_a(ap, f, c, (*s == 'a') ? 0 : 1));
-	if (*s == 'n')
-		return (ft_n(ap, f, c));
-	if (*s == 'b')
-		return (ft_b(ap, f, c));
-	if (*s == 'r')
-		return (ft_r(ap, f, c));
-	if (*s == 'k')
-		return (ft_k(ap, f, c));
-	if (*s == 'f' && *(s + 1) == 'd')
-		return (ft_fd(ap, f, c));
-	return (-1);
+	return (ft_format_bonus(s, f, ap, c));
 }

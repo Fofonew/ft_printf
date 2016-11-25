@@ -67,7 +67,8 @@ SRCS = ft_printf.c \
 	   ft_flags.c \
 	   ft_field.c \
 	   ft_format.c \
-	   ft_conv_di.c \
+
+CONV = ft_conv_di.c \
 	   ft_conv_u.c \
 	   ft_conv_o.c \
 	   ft_conv_c.c \
@@ -84,7 +85,8 @@ SRCS = ft_printf.c \
 	   ft_conv_k.c \
 
 LOBJS = $(addprefix lib/, $(LIB:.c=.o))
-OBJS = $(addprefix srcs/, $(SRCS:.c=.o))
+SOBJS = $(addprefix srcs/, $(SRCS:.c=.o))
+COBJS = $(addprefix conv/, $(CONV:.c=.o))
 
 NAME = libftprintf.a
 CC = gcc
@@ -92,8 +94,8 @@ FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(LOBJS) $(OBJS)
-	@ar -rsc $(NAME) $(LOBJS) $(OBJS)
+$(NAME): $(LOBJS) $(SOBJS) $(COBJS)
+	@ar -rsc $(NAME) $(LOBJS) $(SOBJS)
 	@echo "[$(NAME)]"
 	@$(CC) -I incs -o printf $(NAME) main.c
 	@echo "[printf]"
@@ -106,8 +108,12 @@ srcs/%.o: srcs/%.c
 	@$(CC) $(FLAGS) -I incs -o $@ -c $<
 	@echo "[$@]"
 
+conv/%.o: conv/%.c
+	@$(CC) $(FLAGS) -I incs -o $@ -c $<
+	@echo "[$@]"
+
 clean:
-	@rm -f $(LOBJS) $(OBJS)
+	@rm -f $(LOBJS) $(SOBJS) $(COBJS)
 	@echo "[objs removed]"
 
 fclean: clean
