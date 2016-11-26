@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/09 12:37:22 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/09 12:37:24 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
-
-int			main(void)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	printf("%+s");
-	return (0);
+	int	i;
+
+	i = -1;
+	while (src[++i])
+		dest[i] = src[i];
+	dest[i] = '\0';
+	return (dest);
 }

@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/03 18:49:12 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/09 12:37:03 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int			main(void)
+void		ft_putendl_fd(char const *s, int fd)
 {
-	printf("%+s");
-	return (0);
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

@@ -60,65 +60,42 @@ LIB = ft_atoi.c \
 	  ft_countwords.c \
 	  ft_isspace.c \
 	  ft_lstpush.c \
-	  ft_itoabase.c \
-	  ft_putunbr.c
 
-SRCS = ft_printf.c \
-	   ft_flags.c \
-	   ft_field.c \
-	   ft_format.c \
+PRINTF = ft_printf.c \
+		 ft_format.c \
+		 ft_conv.c
 
-CONV = ft_conv_di.c \
-	   ft_conv_u.c \
-	   ft_conv_o.c \
-	   ft_conv_c.c \
-	   ft_conv_s.c \
-	   ft_conv_p.c \
-	   ft_conv_x.c \
-	   ft_conv_e.c \
-	   ft_conv_f.c \
-	   ft_conv_g.c \
-	   ft_conv_a.c \
-	   ft_conv_n.c \
-	   ft_conv_b.c \
-	   ft_conv_r.c \
-	   ft_conv_k.c \
-
-LOBJS = $(addprefix lib/, $(LIB:.c=.o))
-SOBJS = $(addprefix srcs/, $(SRCS:.c=.o))
-COBJS = $(addprefix conv/, $(CONV:.c=.o))
+OBJ = $(addprefix srcs/, $(LIB:.c=.o))
+PF_OBJ = $(addprefix printf/, $(PRINTF:.c=.o))
 
 NAME = libftprintf.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
+INCS = incs
 
 all: $(NAME)
 
-$(NAME): $(LOBJS) $(SOBJS) $(COBJS)
-	@ar -rsc $(NAME) $(LOBJS) $(SOBJS)
+$(NAME): $(OBJ) $(PF_OBJ)
+	@ar -rsc $(NAME) $(OBJ) $(PF_OBJ)
 	@echo "[$(NAME)]"
-	@$(CC) -I incs -o printf $(NAME) main.c
-	@echo "[printf]"
-
-lib/%.o: lib/%.c
-	@$(CC) $(FLAGS) -I incs -o $@ -c $<
-	@echo "[$@]"
+	@$(CC) -I $(INCS) -o exe $(NAME) main.c
+	@echo "[exe]"
 
 srcs/%.o: srcs/%.c
-	@$(CC) $(FLAGS) -I incs -o $@ -c $<
+	@$(CC) $(FLAGS) -I $(INCS) -o $@ -c $<
 	@echo "[$@]"
 
-conv/%.o: conv/%.c
-	@$(CC) $(FLAGS) -I incs -o $@ -c $<
+printf/%.o: printf/%.c
+	@$(CC) $(FLAGS) -I $(INCS) -o $@ -c $<
 	@echo "[$@]"
 
 clean:
-	@rm -f $(LOBJS) $(SOBJS) $(COBJS)
+	@rm -f $(OBJ) $(PF_OBJ)
 	@echo "[objs removed]"
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f printf
+	@rm -f exe
 	@echo "[workspace clean]"
 
 re: fclean all

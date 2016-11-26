@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/10 11:24:47 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/10 11:24:49 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include <string.h>
 
-int			main(void)
+char	*ft_strchr(const char *s, int c)
 {
-	printf("%+s");
-	return (0);
+	while (*s && *s != c)
+		++s;
+	return (*s == c) ? (char*)s : NULL;
 }

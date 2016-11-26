@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/09 12:37:19 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/09 12:37:20 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
-
-int			main(void)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	printf("%+s");
-	return (0);
+	while (*s1++ == *s2++ && *(s1 - 1))
+		;
+	return ((unsigned char)*(s1 - 1) - (unsigned char)*(s2 - 1));
 }

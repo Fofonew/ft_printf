@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/09 12:37:54 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/09 12:37:56 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include <string.h>
 
-int			main(void)
+char	*ft_strncpy(char *dest, const char *src, size_t n)
 {
-	printf("%+s");
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (src[i] && i != n)
+	{
+		dest[i] = src[i];
+		++i;
+	}
+	while (i != n)
+		dest[i++] = '\0';
+	return (dest);
 }

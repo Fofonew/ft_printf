@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Created: 2016/11/03 18:07:09 by tberthie          #+#    #+#             */
+/*   Updated: 2016/11/09 12:37:04 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
-#include <stdio.h>
+#include "libft.h"
 
-int			main(void)
+void		ft_putnbr(int n)
 {
-	printf("%+s");
-	return (0);
+	unsigned int	n2;
+
+	if (n < 0)
+		ft_putchar('-');
+	n2 = (n < 0 ? -n : n);
+	if (n2 >= 10)
+	{
+		ft_putnbr(n2 / 10);
+		ft_putchar(n2 % 10 + '0');
+	}
+	else
+		ft_putchar(n2 + '0');
 }
