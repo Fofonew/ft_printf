@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 20:02:18 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 18:09:38 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/26 21:25:48 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-int			ft_format(char *s, long long f, va_list ap, int *c);
+int			ft_format(char *s, long long *f, va_list ap, int *c);
 
 char		*ft_cast_int(va_list ap, long long f);
 char		*ft_cast_uns(char s, va_list ap, long long f);
