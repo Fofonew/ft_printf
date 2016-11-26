@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 16:25:56 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/26 20:17:27 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int			ft_fields(char *s, long long *f, va_list ap)
 {
-	long	m;
-	long	p;
+	int		m;
+	int		p;
 	int		i;
 
 	m = 0;
@@ -44,6 +44,7 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 	int			p;
 	int			r;
 
+	*f = 0;
 	p = 0;
 	while ((s[p] == '#' && (*f |= 1)) || (s[p] == '0' && (*f |= 1 << 1)) ||
 	(s[p] == '-' && (*f |= 1 << 2)) || (s[p] == '+' && (*f |= 1 << 3)) ||
@@ -62,7 +63,7 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 		return (&s[p + 1]);
 	++(*c);
 	write(1, "%", 1);
-	return (*s == '%' ? s + 1 : s);
+	return (s);
 }
 
 int					ft_printf(const char *s, ...)
@@ -75,7 +76,7 @@ int					ft_printf(const char *s, ...)
 	while (*s)
 		if (*s == '%')
 		{
-			if (!(s = (const char*)ft_parse((char*)(s + 1), ap, c)))
+			if (!(s = ft_parse((char*)(s + 1), ap, c)))
 				return (-1);
 		}
 		else

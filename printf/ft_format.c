@@ -6,95 +6,83 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 13:50:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 16:27:12 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/26 20:17:51 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 
-static char		*ft_cast_int(va_list ap, long long f)
+static int		ft_flags_len(char s, char *r, long long f, int l)
 {
-	if (f >> 5 & 1)
-		return (ft_con_int((signed char)va_arg(ap, int), f));
-	if (f >> 6 & 1)
-		return (ft_con_int((short)va_arg(ap, int), f));
-	if (f >> 7 & 1)
-		return (ft_con_int(va_arg(ap, long long), f));
-	if (f >> 8 & 1)
-		return (ft_con_int(va_arg(ap, long), f));
-	if (f >> 9 & 1)
-		return (ft_con_int(va_arg(ap, intmax_t), f));
-	if (f >> 10 & 1)
-		return (ft_con_int(va_arg(ap, size_t), f));
-	return (ft_con_int(va_arg(ap, int), f));
+	if (s == 'p' || ((f & 1) && (s == 'x' || s == 'X') && *r != 0))
+		l += 2;
+	else if ((f & 1) && (s == 'o') && *r != 0)
+		l += 1;
+	else if (f >> 3 & 1 && *r != '-' && (s == 'd' || s == 'i'))
+		l += 1;
+	else if (*r != '-' && (f >> 4 & 1))
+		l += 1;
+	if (*r == '-' && l < (int)(f >> 12) && !(f >> 2 & 1) && (*r = '0'))
+		l += 1;
+	return (l);
 }
 
-static char		*ft_cast_uns(char s, va_list ap, long long f)
+static void		ft_out_flags(char s, char *r, long long f, int l)
 {
-	if (f >> 5 & 1)
-		return (ft_con_uns(s, (unsigned char)va_arg(ap, unsigned int), f));
-	if (f >> 6 & 1)
-		return (ft_con_uns(s, (unsigned short)va_arg(ap, unsigned int), f));
-	if (f >> 7 & 1)
-		return (ft_con_uns(s, va_arg(ap, unsigned long long), f));
-	if (f >> 8 & 1)
-		return (ft_con_uns(s, va_arg(ap, unsigned long), f));
-	if (f >> 9 & 1)
-		return (ft_con_uns(s, va_arg(ap, uintmax_t), f));
-	if (f >> 10 & 1)
-		return (ft_con_uns(s, va_arg(ap, size_t), f));
-	return (ft_con_uns(s, va_arg(ap, unsigned int), f));
+	if (s == 'p' || ((f & 1) && (s == 'x' || s == 'X') && *r != 0))
+		write(1, "0x", 2);
+	else if ((f & 1) && (s == 'o') && *r != 0)
+		write(1, "0", 1);
+	else if (f >> 3 & 1 && *r != '-' && (s == 'd' || s == 'i'))
+		write(1, "+", 1);
+	else if (*r != '-' && (f >> 4 & 1))
+		write(1, " ", 1);
+	if (*r == '-' && l < (int)(f >> 12) && !(f >> 2 & 1) && (*r = '0'))
+		write(1, "-", 1);
 }
 
-static char		*ft_cast_dbl(char s, va_list ap, long long f)
+static int		ft_out(char *s, char *r, long long f, int *c)
 {
-	if (f >> 11 & 1)
-		return (ft_con_dbl(s, va_arg(ap, long double), f));
-	return (ft_con_dbl(s, va_arg(ap, double), f));
-}
+	int l;
 
-static int		ft_cast_ptr(va_list ap, long long f, int *c)
-{
-	if (f >> 5 & 1)
-		*(signed char*)va_arg(ap, int*) = *c;
-	else if (f >> 6 & 1)
-		*(short*)va_arg(ap, int*) = *c;
-	else if (f >> 7 & 1)
-		*va_arg(ap, long long*) = *c;
-	else if (f >> 8 & 1)
-		*va_arg(ap, long*) = *c;
-	else if (f >> 9 & 1)
-		*va_arg(ap, intmax_t*) = *c;
-	else if (f >> 10 & 1)
-		*va_arg(ap, size_t*) = *c;
-	else
-		*va_arg(ap, int*) = *c;
+	l = ft_strlen(r);
+	l = ft_flags_len(*s, r, f, l);
+	if (f >> 1 & 1)
+		ft_out_flags(*s, r, f, l);
+	while ((l < (int)(f >> 12)) && !(f >> 2 & 1) && (l += 1))
+		write(1, (f >> 1 & 1 ? "0" : " "), 1);
+	if (!(f >> 1 & 1))
+		ft_out_flags(*s, r, f, l);
+	write(1, r, ft_strlen(r));
+	//dec point #
+	while ((l < (int)(f >> 12)) && (l += 1))
+		write(1, " ", 1);
+	(*c) += l;
 	return (1);
 }
 
 int				ft_format(char *s, long long f, va_list ap, int *c)
 {
 	char	*r;
-	int		l;
 
-	r = NULL;
+	r = 0;
+	if (*s == '%')
+		r = "%";
 	if (*s == 'd' || *s == 'i')
 		r = ft_cast_int(ap, f);
-	else if (*s == 'u' || *s == 'o' || *s == 'x' || *s == 'X')
+	if (*s == 'u' || *s == 'o' || *s == 'x' || *s == 'X')
 		r = ft_cast_uns(*s, ap, f);
-	else if (*s == 'f' || *s == 'F' || *s == 'e' || *s == 'E' || *s == 'g' ||
+	if (*s == 'f' || *s == 'F' || *s == 'e' || *s == 'E' || *s == 'g' ||
 	*s == 'G' || *s == 'a' || *s == 'A')
 		r = ft_cast_dbl(*s, ap, f);
-	else if (*s == 'n')
-		return (ft_cast_ptr(ap, f, c));
+	if (*s == 'p')
+		r = ft_itoabase_uns((unsigned long long)va_arg(ap, void*),16, 0);
+	r = *s == 's' ? va_arg(ap, char*) : r;
+	if (*s == 'c' && (r = ft_strnew(1)))
+		*r = va_arg(ap, int);
+	if (*s == 'n')
+		return (ft_con_ptr(ap, f, c));
 	if (!r)
 		return (-1);
-	l = ft_strlen(r);
-	while ((l < (int)(f >> 12)) && !(f >> 2 & 1) && (l += 1))
-		ft_putchar((f >> 1 & 1 ? '0' : ' '));
-	ft_putstr(r);
-	while ((l < (int)(f >> 12)) && (f >> 2 & 1) && (l += 1))
-		ft_putchar((f >> 1 & 1 ? '0' : ' '));
-	(*c) += l;
-	return (1);
+	return (ft_out(s, r, f, c));
 }

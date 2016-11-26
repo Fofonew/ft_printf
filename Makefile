@@ -63,6 +63,7 @@ LIB = ft_atoi.c \
 
 PRINTF = ft_printf.c \
 		 ft_format.c \
+		 ft_cast.c \
 		 ft_con_nbr.c \
 		 ft_cal.c
 
