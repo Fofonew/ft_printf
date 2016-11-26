@@ -6,15 +6,15 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 20:31:13 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 15:12:32 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/26 16:40:29 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "libft.h"
+#include "libft.h"
 #include <stdio.h>
 
 int			main(void)
 {
-	printf("%+s");
+	printf("Returned %d\n", ft_printf("%+d\n", 10));
 	return (0);
 }

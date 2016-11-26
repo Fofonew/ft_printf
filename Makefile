@@ -63,7 +63,8 @@ LIB = ft_atoi.c \
 
 PRINTF = ft_printf.c \
 		 ft_format.c \
-		 ft_conv.c
+		 ft_con_nbr.c \
+		 ft_cal.c
 
 OBJ = $(addprefix srcs/, $(LIB:.c=.o))
 PF_OBJ = $(addprefix printf/, $(PRINTF:.c=.o))
