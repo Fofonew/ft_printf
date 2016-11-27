@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 13:50:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 20:45:59 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 21:06:15 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static int		ft_out(char *s, char *r, long long *f, int *c)
 	}
 
 	while ((l < f[1]) && !(*f >> 2 & 1) && (l += 1))
-		write(1, (*f >> 1 & 1 ? "0" : " "), 1);
+		write(1, (*f >> 1 & 1 && (f[2] == -1 || f[2] >= l)) ? "0" : " ", 1);
 
 	if (!(*f >> 1 & 1))
 		ft_out_flags(*s, r, f);

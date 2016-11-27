@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 15:46:07 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 19:56:53 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 21:06:34 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_con_int(long long i, long long *f)
 	while (l >= 0)
 		r[l-- + (i < 0)] = '0';
 	*r = i < 0 ? '-' : *r;
-	return (f[2] == 0 ? "" : r);
+	return (f[2] == 0 && *r == '0' ? "" : r);
 }
 
 char		*ft_con_uns(char s, unsigned long long i, long long *f)
