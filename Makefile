@@ -74,7 +74,7 @@ PF_OBJ = $(addprefix printf/, $(PRINTF:.c=.o))
 NAME = libftprintf.a
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
-INCS = incs
+INCS = includes
 
 all: $(NAME)
 
