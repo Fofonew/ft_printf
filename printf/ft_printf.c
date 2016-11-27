@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 20:12:16 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 20:39:11 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 
 	f[0] = 0;
 	p = 0;
+	if (!*s)
+		return (s);
 	while ((s[p] == '#' && (*f |= 1)) || (s[p] == '0' && (*f |= 1 << 1)) ||
 	(s[p] == '-' && (*f |= 1 << 2)) || (s[p] == '+' && (*f |= 1 << 3)) ||
 	(s[p] == ' ' && (*f |= 1 << 4)))
@@ -59,8 +61,6 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 		return (0);
 	else if (r != -1)
 		return (&s[p + 1]);
-	++(*c);
-	write(1, "%", 1);
 	return (s);
 }
 

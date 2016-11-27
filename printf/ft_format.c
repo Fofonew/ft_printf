@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 13:50:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 20:14:19 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 20:37:48 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int		ft_out(char *s, char *r, long long *f, int *c)
 
 static int		ft_pre(char *s, char *r, long long *f, int *c)
 {
-	int 	l;
+	int		l;
 
 	if (!r)
 		r = "(null)";
@@ -77,7 +77,7 @@ static int		ft_pre(char *s, char *r, long long *f, int *c)
 	if (*s == 's' && f[2] >= 0 && f[2] <= l)
 		r = ft_strndup(r, f[2]);
 
-	return (ft_out(s, r, f ,c));
+	return (ft_out(s, r, f, c));
 }
 
 int				ft_format(char *s, long long *f, va_list ap, int *c)
@@ -86,7 +86,7 @@ int				ft_format(char *s, long long *f, va_list ap, int *c)
 
 	r = 0;
 	if (*s == '%')
-		return(ft_pre(s, "%", f, c));
+		return (ft_pre(s, "%", f, c));
 	else if (*s == 'd' || *s == 'i')
 		return (ft_pre(s, ft_cast_int(ap, f), f, c));
 	else if (*s == 'u' || *s == 'o' || *s == 'x' || *s == 'X')
@@ -100,11 +100,10 @@ int				ft_format(char *s, long long *f, va_list ap, int *c)
 	else if (*s == 's')
 		return (ft_pre(s, va_arg(ap, char*), f, c));
 	else if (*s == 'c')
-		return ((r = ft_strnew(1)) && (*r = va_arg(ap, int)) != -1 ?
-		ft_pre(s, r, f, c) : 0);
+		return ((r = ft_strnew(1)) &&
+		(*r = va_arg(ap, int)) != -1 ? ft_pre(s, r, f, c) : 0);
 	else if (*s == 'n')
 		return (ft_con_ptr(ap, *f, c));
 	else
-		return (-1);
-	return (ft_pre(s, r, f, c));
+		return (ft_pre(s, ft_strndup(s, 1), f, c));
 }
