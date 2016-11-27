@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 20:39:11 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 20:53:10 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 
 	f[0] = 0;
 	p = 0;
+	r = 0;
 	if (!*s)
 		return (s);
 	while ((s[p] == '#' && (*f |= 1)) || (s[p] == '0' && (*f |= 1 << 1)) ||
@@ -51,15 +52,17 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 	(s[p] == ' ' && (*f |= 1 << 4)))
 		++p;
 	p += ft_fields(&s[p], f, ap);
-	if (((s[p] == 'h' && (s[p + 1] == 'h') && (*f |= 1 << 5)) || ((s[p] ==
+	if ((s[p] == 'h' && (s[p + 1] == 'h') && (*f |= 1 << 5)) || ((s[p] ==
 	'h') && (*f |= 1 << 6)) || ((s[p] == 'l' && s[p + 1] == 'l') && (*f |=
 	1 << 7)) || ((s[p] == 'l') && (*f |= 1 << 8)) || ((s[p] == 'j') && (*f |=
 	1 << 9)) || ((s[p] == 'z') && (*f |= 1 << 10)) || ((s[p] == 'L') &&
-	(*f |= 1 << 11))))
+	(*f |= 1 << 11)))
 		p += ((*f >> 5 & 1) || (*f >> 7 & 1)) ? 2 : 1;
-	if (!(r = ft_format(&s[p], f, ap, c)))
+	if (!s[p])
+		return (&s[p]);
+	if (s[p] && !(r = ft_format(&s[p], f, ap, c)))
 		return (0);
-	else if (r != -1)
+	else if (!s[p] || r != -1)
 		return (&s[p + 1]);
 	return (s);
 }
