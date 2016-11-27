@@ -60,6 +60,7 @@ LIB = ft_atoi.c \
 	  ft_countwords.c \
 	  ft_isspace.c \
 	  ft_lstpush.c \
+	  ft_freeret.c \
 
 PRINTF = ft_printf.c \
 		 ft_format.c \

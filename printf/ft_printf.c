@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 22:46:56 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 20:12:16 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,14 @@ static int			ft_fields(char *s, long long *f, va_list ap)
 	else
 		while (s[i] >= '0' && s[i] <= '9')
 			m += m * 9 + s[i++] - '0';
-	if (m != 0)
-		f[1] = m;
+	f[1] = m;
 	p = -1;
 	if (s[i] == '.' && s[i + 1] == '*' && (i += 2))
 		p = va_arg(ap, int);
 	else if (s[i] == '.' && (i += 1) && !(p = 0))
 		while (s[i] >= '0' && s[i] <= '9')
 			p += p * 9 + s[i++] - '0';
-	if (p != -1)
-		f[2] = p;
+	f[2] = p;
 	return (i);
 }
 
@@ -45,8 +43,6 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 	int			r;
 
 	f[0] = 0;
-	f[1] = 0;
-	f[2] = -1;
 	p = 0;
 	while ((s[p] == '#' && (*f |= 1)) || (s[p] == '0' && (*f |= 1 << 1)) ||
 	(s[p] == '-' && (*f |= 1 << 2)) || (s[p] == '+' && (*f |= 1 << 3)) ||
@@ -83,7 +79,7 @@ int					ft_printf(const char *s, ...)
 		}
 		else
 		{
-			(*c)++;
+			((*c) += 1);
 			write(1, s++, 1);
 		}
 	va_end(ap);

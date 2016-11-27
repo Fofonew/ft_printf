@@ -6,14 +6,14 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 15:46:07 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/26 17:56:23 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/27 19:56:53 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "printf.h"
 #include <stdio.h>
 
-char		*ft_con_int(long long i)
+char		*ft_con_int(long long i, long long *f)
 {
 	unsigned long long	i2;
 	char				*r;
@@ -23,6 +23,7 @@ char		*ft_con_int(long long i)
 	l = 1;
 	while (i2 >= 10 && (i2 /= 10))
 		l++;
+	l = f[2] > l ? f[2] : l;
 	if (!(r = ft_strnew(l-- + (i < 0))))
 		return (0);
 	i2 = i < 0 ? -i : i;
@@ -32,20 +33,22 @@ char		*ft_con_int(long long i)
 		i2 /= 10;
 	}
 	r[l-- + (i < 0)] = (char)(i2 % 10 + '0');
+	while (l >= 0)
+		r[l-- + (i < 0)] = '0';
 	*r = i < 0 ? '-' : *r;
-	return (r);
+	return (f[2] == 0 ? "" : r);
 }
 
-char		*ft_con_uns(char s, unsigned long long i)
+char		*ft_con_uns(char s, unsigned long long i, long long *f)
 {
 	if (s == 'u')
-		return (ft_itoabase_uns(i, 10, 0));
+		return (ft_itoabase_uns(i, 10, f, s));
 	if (s == 'o')
-		return (ft_itoabase_uns(i, 8, 0));
+		return (ft_itoabase_uns(i, 8, f, s));
 	if (s == 'x')
-		return (ft_itoabase_uns(i, 16, 0));
+		return (ft_itoabase_uns(i, 16, f, s));
 	if (s == 'X')
-		return (ft_itoabase_uns(i, 16, 1));
+		return (ft_itoabase_uns(i, 16, f, s));
 	return (0);
 }
 
