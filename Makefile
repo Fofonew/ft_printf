@@ -66,7 +66,8 @@ PRINTF = ft_printf.c \
 		 ft_format.c \
 		 ft_cast.c \
 		 ft_con_nbr.c \
-		 ft_cal.c
+		 ft_cal.c \
+		 ft_color.c
 
 OBJ = $(addprefix srcs/, $(LIB:.c=.o))
 PF_OBJ = $(addprefix printf/, $(PRINTF:.c=.o))

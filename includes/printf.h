@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 20:02:18 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 19:56:42 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 01:19:41 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char		*ft_con_dbl(char s, long double i, long long f);
 int			ft_con_ptr(va_list ap, long long f, int *c);
 
 char		*ft_itoabase_uns(unsigned long long n, int b, long long *f, char c);
+int			ft_color(char *s, int i, int *c);
 
 #endif

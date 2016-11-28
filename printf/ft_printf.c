@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 20:53:10 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 01:39:28 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,28 @@ static int			ft_fields(char *s, long long *f, va_list ap)
 	return (i);
 }
 
-static char			*ft_parse(char *s, va_list ap, int *c)
+static int			ft_flags(char *s, long long *f, int p, int i)
+{
+	while ((s[p + i] == '#' && (*f |= 1)) || (s[p + i] == '0' &&
+	(*f |= 1 << 1)) || (s[p + i] == '-' && (*f |= 1 << 2)) || (s[p + i] == '+' &&
+	(*f |= 1 << 3)) || (s[p + i] == ' ' && (*f |= 1 << 4)))
+		++p;
+	return (p);
+}
+
+static int			ft_mod(char *s, long long *f, int p, int i)
+{
+
+	if ((s[p + i] == 'h' && (s[p + i + 1] == 'h') && (*f |= 1 << 5)) ||
+	((s[p + i] == 'h') && (*f |= 1 << 6)) || ((s[p + i] == 'l' &&
+	s[p + i + 1] == 'l') && (*f |= 1 << 7)) || ((s[p + i] == 'l') && (*f |=
+	1 << 8)) || ((s[p + i] == 'j') && (*f |= 1 << 9)) || ((s[p + i] == 'z') &&
+	(*f |= 1 << 10)) || ((s[p + i] == 'L') && (*f |= 1 << 11)))
+		p += ((*f >> 5 & 1) || (*f >> 7 & 1)) ? 2 : 1;
+	return (p);
+}
+
+static int			ft_parse(char *s, int i, va_list ap, int *c)
 {
 	long long	f[3];
 	int			p;
@@ -45,46 +66,43 @@ static char			*ft_parse(char *s, va_list ap, int *c)
 	f[0] = 0;
 	p = 0;
 	r = 0;
-	if (!*s)
-		return (s);
-	while ((s[p] == '#' && (*f |= 1)) || (s[p] == '0' && (*f |= 1 << 1)) ||
-	(s[p] == '-' && (*f |= 1 << 2)) || (s[p] == '+' && (*f |= 1 << 3)) ||
-	(s[p] == ' ' && (*f |= 1 << 4)))
-		++p;
-	p += ft_fields(&s[p], f, ap);
-	if ((s[p] == 'h' && (s[p + 1] == 'h') && (*f |= 1 << 5)) || ((s[p] ==
-	'h') && (*f |= 1 << 6)) || ((s[p] == 'l' && s[p + 1] == 'l') && (*f |=
-	1 << 7)) || ((s[p] == 'l') && (*f |= 1 << 8)) || ((s[p] == 'j') && (*f |=
-	1 << 9)) || ((s[p] == 'z') && (*f |= 1 << 10)) || ((s[p] == 'L') &&
-	(*f |= 1 << 11)))
-		p += ((*f >> 5 & 1) || (*f >> 7 & 1)) ? 2 : 1;
-	if (!s[p])
-		return (&s[p]);
-	if (s[p] && !(r = ft_format(&s[p], f, ap, c)))
+	if (!s[i])
+		return (i);
+	p = ft_flags(s, f, p, i);
+	p += ft_fields(&s[p + i], f, ap);
+	p = ft_flags(s, f, p, i);
+	p = ft_mod(s, f, p, i);
+	p = ft_flags(s, f, p, i);
+	if (!s[p + i])
+		return (p + i);
+	if (s[p + i] && !(r = ft_format(&s[p + i], f, ap, c)))
 		return (0);
-	else if (!s[p] || r != -1)
-		return (&s[p + 1]);
-	return (s);
+	else if (!s[p + i] || r != -1)
+		return (p + i + 1);
+	return (i);
 }
 
 int					ft_printf(const char *s, ...)
 {
 	va_list			ap;
 	int				c[1];
+	int				i;
 
+	i = 0;
 	*c = 0;
 	va_start(ap, s);
-	while (*s)
-		if (*s == '%')
+	while (s[i])
+	{
+		if (s[i] == '%')
 		{
-			if (!(s = ft_parse((char*)(s + 1), ap, c)))
+			if (!(i = ft_parse((char*)s, i + 1, ap, c)))
 				return (-1);
 		}
-		else
-		{
-			((*c) += 1);
-			write(1, s++, 1);
-		}
+		else if (s[i] == '{')
+			i = ft_color((char*)s, i, c);
+		else if (((*c) += 1))
+			write(1, &s[i++], 1);
+	}
 	va_end(ap);
 	return (*c);
 }
