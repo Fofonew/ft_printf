@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 18:07:48 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 17:26:56 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:56:22 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,11 @@ char		*ft_cast_dbl(char s, va_list ap, long long f)
 	return (ft_con_dbl(s, va_arg(ap, double), f));
 }
 
-char		*ft_cast_str(char s, va_list ap, long long f)
+char		*ft_cast_str(char s, va_list ap)
 {
-	char	*c;
+	char		*c;
 
 	c = 0;
-	/*if (s == 'S' || (s == 's' && (f >> 8 & 1)))
-		return (ft_con_wch(s, va_arg(ap, wchar_t*), f));
-	if (s == 'C' || (s == 'c' && (f >> 8 & 1)))
-		return (ft_con_wch(s, va_arg(ap, wint_t), f));*/
 	if (s == 's')
 		return (va_arg(ap, char*));
 	if (s == 'c' && (c = ft_strnew(1)))
@@ -69,6 +65,5 @@ char		*ft_cast_str(char s, va_list ap, long long f)
 		*c = va_arg(ap, int);
 		return (c);
 	}
-	f = 0;
 	return (0);
 }

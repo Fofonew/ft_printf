@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 15:56:27 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 17:25:35 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 18:31:38 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,5 @@ char		*ft_itoabase_uns(unsigned long long n, int b, long long *f, char c)
 	("0123456789abcdef")[n % b];
 	while (l >= 0)
 		s[l--] = '0';
-	return (f && f[2] == 0 ? "" : s);
+	return (f[2] == 0 && *s == '0' ? "" : s);
 }
