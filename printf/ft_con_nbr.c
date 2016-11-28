@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 15:46:07 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 21:06:34 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:27:31 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ char		*ft_con_int(long long i, long long *f)
 
 char		*ft_con_uns(char s, unsigned long long i, long long *f)
 {
-	if (s == 'u')
+	if (s == 'u' || s == 'U')
 		return (ft_itoabase_uns(i, 10, f, s));
-	if (s == 'o')
+	if (s == 'o' || s == 'O')
 		return (ft_itoabase_uns(i, 8, f, s));
 	if (s == 'x')
 		return (ft_itoabase_uns(i, 16, f, s));

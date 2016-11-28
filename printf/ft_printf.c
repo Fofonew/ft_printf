@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 15:24:18 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:21:07 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,17 @@ static int			ft_fields(char *s, long long *f, va_list ap)
 	return (i);
 }
 
-static int			ft_flags(char *s, long long *f, int p, int i)
+static int			ft_flags(char *s, long long *f, int p)
 {
-	while ((s[p + i] == '#' && (*f |= 1)) || (s[p + i] == '0' &&
-	(*f |= 1 << 1)) || (s[p + i] == '-' && (*f |= 1 << 2)) || (s[p + i] == '+' &&
-	(*f |= 1 << 3)) || (s[p + i] == ' ' && (*f |= 1 << 4)))
+	while ((s[p] == '#' && (*f |= 1)) || (s[p] == '0' &&
+	(*f |= 1 << 1)) || (s[p] == '-' && (*f |= 1 << 2)) || (s[p] == '+' &&
+	(*f |= 1 << 3)) || (s[p] == ' ' && (*f |= 1 << 4)))
 		++p;
 	return (p);
 }
 
 static int			ft_mod(char *s, long long *f, int p, int i)
 {
-
 	if ((s[p + i] == 'h' && (s[p + i + 1] == 'h') && (*f |= 1 << 5)) ||
 	((s[p + i] == 'h') && (*f |= 1 << 6)) || ((s[p + i] == 'l' &&
 	s[p + i + 1] == 'l') && (*f |= 1 << 7)) || ((s[p + i] == 'l') && (*f |=
@@ -68,11 +67,11 @@ static int			ft_parse(char *s, int i, va_list ap, int *c)
 	r = 0;
 	if (!s[i])
 		return (i);
-	p = ft_flags(s, f, p, i);
+	p = ft_flags(&s[i], f, p);
 	p += ft_fields(&s[p + i], f, ap);
-	p = ft_flags(s, f, p, i);
+	p = ft_flags(&s[i], f, p);
 	p = ft_mod(s, f, p, i);
-	p = ft_flags(s, f, p, i);
+	p = ft_flags(&s[i], f, p);
 	if (!s[p + i])
 		return (p + i);
 	if (s[p + i] && !(r = ft_format(&s[p + i], f, ap, c)))

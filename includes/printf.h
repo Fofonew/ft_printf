@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/25 20:02:18 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 01:19:41 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 17:21:00 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@
 
 int			ft_format(char *s, long long *f, va_list ap, int *c);
 
-char		*ft_cast_int(va_list ap, long long *f);
+char		*ft_cast_int(char s, va_list ap, long long *f);
 char		*ft_cast_uns(char s, va_list ap, long long *f);
 char		*ft_cast_dbl(char s, va_list ap, long long f);
+char		*ft_cast_str(char s, va_list ap, long long f);
 
 char		*ft_con_int(long long i, long long *f);
 char		*ft_con_uns(char s, unsigned long long i, long long *f);
