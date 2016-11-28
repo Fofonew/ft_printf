@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/18 17:19:45 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 17:21:07 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/28 19:35:13 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,24 @@ static int			ft_fields(char *s, long long *f, va_list ap)
 	int		i;
 
 	m = 0;
-	i = *s == '*' ? 1 : 0;
-	if (*s == '*')
+	i = 0;
+	if (*s == '*' && (i += 1))
 		m = va_arg(ap, int);
-	else
-		while (s[i] >= '0' && s[i] <= '9')
-			m += m * 9 + s[i++] - '0';
-	f[1] = m;
+	m = (s[i] >= '0' && s[i] <= '9') ? 0 : m;
+	while (s[i] >= '0' && s[i] <= '9')
+		m += m * 9 + s[i++] - '0';
+	if (s[i] == '*' && (i += 1))
+		m = va_arg(ap, int);
+	f[1] = m < 0 ? -m : m;
+	if (m < 0 && (*f |= 1 << 2))
+		*f |= 1 << 2;
 	p = -1;
 	if (s[i] == '.' && s[i + 1] == '*' && (i += 2))
 		p = va_arg(ap, int);
 	else if (s[i] == '.' && (i += 1) && !(p = 0))
 		while (s[i] >= '0' && s[i] <= '9')
 			p += p * 9 + s[i++] - '0';
-	f[2] = p;
+	f[2] = p < -1 ? -1 : p;
 	return (i);
 }
 
@@ -47,7 +51,7 @@ static int			ft_flags(char *s, long long *f, int p)
 
 static int			ft_mod(char *s, long long *f, int p, int i)
 {
-	if ((s[p + i] == 'h' && (s[p + i + 1] == 'h') && (*f |= 1 << 5)) ||
+	while ((s[p + i] == 'h' && (s[p + i + 1] == 'h') && (*f |= 1 << 5)) ||
 	((s[p + i] == 'h') && (*f |= 1 << 6)) || ((s[p + i] == 'l' &&
 	s[p + i + 1] == 'l') && (*f |= 1 << 7)) || ((s[p + i] == 'l') && (*f |=
 	1 << 8)) || ((s[p + i] == 'j') && (*f |= 1 << 9)) || ((s[p + i] == 'z') &&
