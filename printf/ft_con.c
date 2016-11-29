@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 15:46:07 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 18:16:43 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/29 13:40:50 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,6 @@ char		*ft_con_uns(char s, unsigned long long i, long long *f)
 		return (ft_itoabase_uns(i, 8, f, s));
 	if (s == 'x' || s == 'X')
 		return (ft_itoabase_uns(i, 16, f, s));
-	return (0);
-}
-
-char		*ft_con_dbl(char s, long double i, long long f)
-{
-	s = 0;
-	i = 0;
-	f = 0;
 	return (0);
 }
 

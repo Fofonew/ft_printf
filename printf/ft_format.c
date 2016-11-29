@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 13:50:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/28 18:38:05 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/29 13:42:11 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 static int		ft_flags_len(char s, char *r, long long *f, int l)
 {
-	if (s == 'p' || ((*f & 1) && (s == 'x' || s == 'X') && *r && *r != '0'))
+	if (s == 'p' || ((*f & 1) && (s == 'x' || s == 'X') && *r && (*r != '0' ||
+	*(r + 1))))
 		l += 2;
 	else if ((*f & 1) && (s == 'o' || s == 'O') && *r != '0')
 		l += 1;
@@ -27,7 +28,8 @@ static int		ft_flags_len(char s, char *r, long long *f, int l)
 
 static void		ft_out_flags(char s, char *r, long long *f)
 {
-	if (s == 'p' || ((*f & 1) && (s == 'x' || s == 'X') && *r && *r != '0'))
+	if (s == 'p' || ((*f & 1) && (s == 'x' || s == 'X') && *r && (*r != '0' ||
+	*(r + 1))))
 		write(1, (s == 'X' ? "0X" : "0x"), 2);
 	else if ((*f & 1) && (s == 'o' || s == 'O') && *r != '0')
 		write(1, "0", 1);
@@ -87,12 +89,12 @@ int				ft_format(char *s, long long *f, va_list ap, int *c)
 	else if (*s == 'u' || *s == 'U' || *s == 'o' || *s == 'O' || *s == 'x' ||
 	*s == 'X')
 		return (ft_pre(s, ft_cast_uns(*s, ap, f), f, c));
-	else if (*s == 'f' || *s == 'F' || *s == 'e' || *s == 'E' || *s == 'g' ||
-	*s == 'G' || *s == 'a' || *s == 'A')
-		return (ft_pre(s, ft_cast_dbl(*s, ap, *f), f, c));
 	else if (*s == 'p')
 		return (ft_pre(s, ft_itoabase_uns((unsigned long long)va_arg(ap, void*),
 		16, f, *s), f, c));
+	else if (*s == 'b')
+		return (ft_pre(s, ft_itoabase_uns(va_arg(ap, int),
+		2, f, *s), f, c));
 	else if (*s == 'S' || *s == 'C' || ((*s == 'c' || *s == 's') &&
 	(*f >> 8 & 1)))
 		return (ft_cast_wch(*s, ap, f, c));
