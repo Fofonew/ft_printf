@@ -61,6 +61,7 @@ LIB = ft_atoi.c \
 	  ft_isspace.c \
 	  ft_lstpush.c \
 	  ft_freeret.c \
+	  ft_wchar.c \
 
 PRINTF = ft_printf.c \
 		 ft_format.c \
@@ -70,7 +71,7 @@ PRINTF = ft_printf.c \
 		 ft_utl.c \
 		 ft_color.c
 
-OBJ = $(addprefix srcs/, $(LIB:.c=.o))
+OBJ = $(addprefix libft/, $(LIB:.c=.o))
 PF_OBJ = $(addprefix printf/, $(PRINTF:.c=.o))
 
 NAME = libftprintf.a
@@ -86,7 +87,7 @@ $(NAME): $(OBJ) $(PF_OBJ)
 	@$(CC) -I $(INCS) -o exe $(NAME) main.c
 	@echo "[exe]"
 
-srcs/%.o: srcs/%.c
+libft/%.o: libft/%.c
 	@$(CC) $(FLAGS) -I $(INCS) -o $@ -c $<
 	@echo "[$@]"
 

@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/26 13:50:56 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/29 13:42:11 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/29 17:48:14 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ static int		ft_out(char *s, char *r, long long *f, int *c)
 	while ((l < f[1]) && (l += 1))
 		write(1, " ", 1);
 	(*c) += l;
+	if (*s != '%' && *s != 's' && *s != 'c' && *r)
+		free(r);
 	return (1);
 }
 
@@ -69,8 +71,10 @@ static int		ft_pre(char *s, char *r, long long *f, int *c)
 {
 	int		l;
 
-	if (!r)
+	if (!r && *s == 's')
 		r = "(null)";
+	else if (!r)
+		return (0);
 	l = *s == 'c' ? 1 : ft_strlen(r);
 	if (*s == 's' && f[2] >= 0 && f[2] <= l)
 		r = ft_strndup(r, f[2]);
@@ -79,9 +83,6 @@ static int		ft_pre(char *s, char *r, long long *f, int *c)
 
 int				ft_format(char *s, long long *f, va_list ap, int *c)
 {
-	char	*r;
-
-	r = 0;
 	if (*s == '%')
 		return (ft_pre(s, "%", f, c));
 	else if (*s == 'd' || *s == 'i' || *s == 'D')

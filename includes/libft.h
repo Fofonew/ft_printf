@@ -6,7 +6,7 @@
 /*   By: tberthie <tberthie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/02 21:48:08 by tberthie          #+#    #+#             */
-/*   Updated: 2016/11/27 17:57:06 by tberthie         ###   ########.fr       */
+/*   Updated: 2016/11/29 17:54:07 by tberthie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,14 @@ void			ft_putchar_fd(char c, int fd);
 void			ft_putstr_fd(char const *s, int fd);
 void			ft_putendl_fd(char const *s, int fd);
 void			ft_putnbr_fd(int n, int fd);
+
 t_list			*ft_lstnew(void const *content, size_t content_size);
 void			ft_lstdelone(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstdel(t_list **alst, void (*del)(void *, size_t));
 void			ft_lstadd(t_list **alst, t_list *new);
 void			ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list			*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
+
 char			*ft_strndup(const char *s1, size_t n);
 int				ft_countwords(const char *s, int c);
 void			ft_puttab(char **tab);
@@ -91,7 +93,12 @@ int				ft_isspace(char c);
 void			ft_lstpush(t_list **alst, t_list *new);
 char			*ft_itoabase(int n, char *b);
 void			ft_putunbr(unsigned int n);
-int				ft_printf(const char *s, ...);
 int				ft_freeret(void *p, int r);
+
+int				ft_printf(const char *s, ...);
+int				ft_charwlen(wchar_t c);
+int				ft_strwlen(wchar_t *s);
+void			ft_putwchar(wchar_t c);
+void			ft_putwstr(wchar_t *s);
 
 #endif
