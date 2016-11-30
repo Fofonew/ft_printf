@@ -84,8 +84,6 @@ all: $(NAME)
 $(NAME): $(OBJ) $(PF_OBJ)
 	@ar -rsc $(NAME) $(OBJ) $(PF_OBJ)
 	@echo "[$(NAME)]"
-	@$(CC) -I $(INCS) -o exe $(NAME) main.c
-	@echo "[exe]"
 
 libft/%.o: libft/%.c
 	@$(CC) $(FLAGS) -I $(INCS) -o $@ -c $<
@@ -101,7 +99,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f exe
 	@echo "[workspace clean]"
 
 re: fclean all
