@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_errret.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fofow <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: doriol <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/22 16:45:09 by fofow             #+#    #+#             */
-/*   Updated: 2017/11/22 16:45:13 by fofow            ###   ########.fr       */
+/*   Created: 2018/03/26 02:18:00 by doriol            #+#    #+#             */
+/*   Updated: 2018/03/26 02:18:02 by doriol           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isprint(int c)
+#include "libft.h"
+
+#include <unistd.h>
+
+int			ft_errret(char *name, char *msg, int ret)
 {
-	return ((c >= 32 && c < 127) ? 1 : 0);
+	write(2, name, ft_strlen(name));
+	write(2, ": ", 2);
+	write(2, msg, ft_strlen(msg));
+	write(2, "\n", 1);
+	return (ret);
 }
